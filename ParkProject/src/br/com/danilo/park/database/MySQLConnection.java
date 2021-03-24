@@ -7,25 +7,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
-// MySQL      -> gestão de conexao
-// Repository -> operações no banco
-// Service    -> meio de campo com a usa logica/validacao/integration.... Repository
-// Interface/View  -> Abstracao do seu Service com o usuario
-
-
-//Desafio
-// Criar relatórios
-// Bubg entrada e saída
-// Aperfeiçoar swing
-// acrescentar total
-
 public class MySQLConnection {
 
 
     public static final Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("url", "root", "password");
+        return DriverManager.getConnection("url", "user", "pass"
+        );
     }
 
     public static void main(String[] args) throws SQLException {
@@ -36,7 +23,8 @@ public class MySQLConnection {
         String SQL_SELECT = "Select * from CONTROLLER";
         try (
                 Connection conn = DriverManager.getConnection(
-                        "url", "root", "password");
+                        "url", "user", "pass"
+                );
                 PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT))
         {
 

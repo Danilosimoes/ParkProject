@@ -27,18 +27,3 @@ public class MainController {
     }
 
 }
-
-
-/*ServiceController sc = new ServiceController();
-
-        sc.controllerIn(new Controller(
-                0,
-                "XTPO6666",
-                "FUSCA",
-                LocalDateTime.now(),
-                LocalDateTime.now()
-        ));
-
-        sc.getAll().forEach(controller -> {
-            System.out.println(controller.getDateIn());
-        });*/

@@ -1,5 +1,6 @@
 package br.com.danilo.park.view;
 
+import br.com.danilo.park.service.ControllerException;
 import br.com.danilo.park.service.ServiceController;
 
 import javax.swing.*;
@@ -11,16 +12,20 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
 
+import static java.lang.String.valueOf;
+
 public class ViewController extends JFrame {
     private JTextField textLicense;
     private JTextField textModel;
     private JButton btnIn;
     private JButton btnOut;
     private JPanel panel;
+    private JTextField textTotal;
+    private JLabel labelError;
 
     private final ServiceController serviceController;
 
-    public ViewController() {
+    public ViewController(){
         serviceController = new ServiceController();
         add(panel);
         setSize(400, 200);
@@ -30,17 +35,19 @@ public class ViewController extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    serviceController.in(
-                            textLicense.getText(),
-                            textModel.getText()
-                    );
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-                try {
+                    try {
+                        serviceController.in(
+                                textLicense.getText(),
+                                textModel.getText()
+                        );
+                    } catch (ControllerException ex) {
+                        labelError.setText(ex.getMessage());
+                    }
+
                     serviceController.getAll().forEach(controller -> {
                         System.out.println(controller.getDateIn());
                     });
+
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -52,8 +59,8 @@ public class ViewController extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                   var total =  serviceController.out(textLicense.getText());
-                   System.out.println(total);
+                    var total = serviceController.out(textLicense.getText());
+                    textTotal.setText(String.valueOf(total));
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }

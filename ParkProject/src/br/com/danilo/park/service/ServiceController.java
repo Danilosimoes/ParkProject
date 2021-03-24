@@ -21,23 +21,30 @@ public class ServiceController {
         return repository.getAll();
     }
 
-    public void in(String license, String model) throws SQLException {
-        // preciso verficiar se existe um in em andamento
+    public void in(String license, String model) throws SQLException, ControllerException {
+        var controller = repository.find(license);
+
+        if( controller != null){
+            throw new ControllerException("out exist");
+        }
+
+
         repository.save(new Controller(
                 0,
                 license.toUpperCase(),
                 model.toUpperCase(),
                 LocalDateTime.now(),
-                null
+                null,
+                0
         ));
     }
 
     public double out(String license) throws SQLException {
-        //
-        var dateIn = LocalDateTime.now().minusHours(3);
+        var controller = repository.find(license);
+        var dateIn = controller.getDateIn();
         var dateOut = LocalDateTime.now();
         var totalHours = dateIn.until(dateOut, ChronoUnit.HOURS) * 10;
-        repository.update(license.toUpperCase(), Timestamp.valueOf(dateOut));
+        repository.update(license.toUpperCase(), Timestamp.valueOf(dateOut), totalHours);
         return totalHours;
     }
 

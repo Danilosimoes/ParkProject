@@ -9,19 +9,19 @@ public class Controller {
     private String model;
     private LocalDateTime dateIn;
     private LocalDateTime dateOut;
+    private double total;
 
-
-    private Double Total;
 
     public Controller() {
     }
 
-    public Controller(long id, String license, String model, LocalDateTime timeIn, LocalDateTime timeOut) {
+    public Controller(long id, String license, String model, LocalDateTime timeIn, LocalDateTime timeOut, double total) {
         this.id = id;
         this.license = license;
         this.model = model;
         this.dateIn = timeIn;
         this.dateOut = timeOut;
+        this.total = total;
     }
 
 
@@ -61,5 +61,13 @@ public class Controller {
 
     public void setDateOut(LocalDateTime dateOut) {
         this.dateOut = dateOut;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+
+    public double getTotal() {
+        return total;
     }
 }
