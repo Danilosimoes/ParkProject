@@ -11,10 +11,7 @@ public class MySQLConnection {
 
 
     public static final Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:mysql://database-rds-mysql.c2mfcsdj7ixd.sa-east-1.rds.amazonaws.com:3306/CARS?autoReconnect=true&useSSL=false", "master", "danilo123"
-
-
-
+        return DriverManager.getConnection("url", "user", "pass"
         );
     }
 
@@ -26,10 +23,7 @@ public class MySQLConnection {
         String SQL_SELECT = "Select * from CONTROLLER";
         try (
                 Connection conn = DriverManager.getConnection(
-                        "jdbc:mysql://database-rds-mysql.c2mfcsdj7ixd.sa-east-1.rds.amazonaws.com:3306/CARS?autoReconnect=true&useSSL=false", "master", "danilo123"
-
-
-
+                        "url", "user", "pass"
                 );
                 PreparedStatement preparedStatement = conn.prepareStatement(SQL_SELECT))
         {
