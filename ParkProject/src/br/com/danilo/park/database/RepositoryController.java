@@ -75,4 +75,28 @@ public class RepositoryController {
         ps.close();
         return controller;
     }
+
+    public Controller findDate(String dateOne, String dateTwo ) throws SQLException {
+        Connection con = MySQLConnection.getConnection();
+        PreparedStatement ps = con.prepareStatement("SELECT FROM CONTROLLER WHERE DATE_IN BETWEEN ? AND ?");
+        ps.setString(1, dateOne);
+        ps.setString(2, dateTwo);
+        ResultSet rs = ps.executeQuery();
+        Controller controller = null;
+        if (rs.next()){
+            controller = new Controller(
+                    rs.getLong("ID"),
+                    rs.getString("LICENSE"),
+                    rs.getString("MODEL"),
+                    rs.getTimestamp("DATE_IN").toLocalDateTime(),
+                    rs.getTimestamp("DATE_OUT").toLocalDateTime(),
+                    rs.getDouble("TOTAL"));
+
+        }
+        con.close();
+        ps.close();
+        return controller;
+
+
+    }
 }

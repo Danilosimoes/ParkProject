@@ -22,7 +22,7 @@ public class ServiceController {
     }
 
     public void in(String license, String model) throws SQLException, ControllerException {
-        var controller = repository.find(license);
+        var controller= repository.find(license);
 
         if( controller != null){
             throw new ControllerException("out exist");
@@ -46,6 +46,12 @@ public class ServiceController {
         var totalHours = dateIn.until(dateOut, ChronoUnit.HOURS) * 10;
         repository.update(license.toUpperCase(), Timestamp.valueOf(dateOut), totalHours);
         return totalHours;
+    }
+
+    public String dateFind(String dateOne, String dateTwo) throws SQLException {
+        repository.findDate(dateOne.toUpperCase(), dateTwo.toUpperCase());
+        return dateFind(dateOne, dateTwo);
+
     }
 
 
