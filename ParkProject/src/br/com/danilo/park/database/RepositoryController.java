@@ -76,9 +76,10 @@ public class RepositoryController {
         return controller;
     }
 
+
     public Controller findDate(String dateOne, String dateTwo ) throws SQLException {
         Connection con = MySQLConnection.getConnection();
-        PreparedStatement ps = con.prepareStatement("SELECT FROM CONTROLLER WHERE DATE_IN BETWEEN ? AND ?");
+        PreparedStatement ps = con.prepareStatement("SELECT * FROM CONTROLLER WHERE DATE_IN BETWEEN ? AND ?");
         ps.setString(1, dateOne);
         ps.setString(2, dateTwo);
         ResultSet rs = ps.executeQuery();

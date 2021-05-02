@@ -48,11 +48,6 @@ public class ServiceController {
         return totalHours;
     }
 
-    public String dateFind(String dateOne, String dateTwo) throws SQLException {
-        repository.findDate(dateOne.toUpperCase(), dateTwo.toUpperCase());
-        return dateFind(dateOne, dateTwo);
-
-    }
 
 
 }

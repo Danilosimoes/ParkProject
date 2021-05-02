@@ -22,6 +22,9 @@ public class ViewController extends JFrame {
     private JPanel panel;
     private JTextField textTotal;
     private JLabel labelError;
+    private JTextField textBefore;
+    private JTextField textAfter;
+    private JButton btnSearch;
 
     private final ServiceController serviceController;
 
@@ -66,7 +69,9 @@ public class ViewController extends JFrame {
                 }
             }
         });
+
     }
+
 
 }
 
