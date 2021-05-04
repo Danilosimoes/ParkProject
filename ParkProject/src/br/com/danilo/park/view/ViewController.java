@@ -35,6 +35,7 @@ public class ViewController extends JFrame {
         setTitle("Park Control");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         btnIn.addActionListener(new ActionListener() {
+            //Realizando a entrada dos carros
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -46,6 +47,7 @@ public class ViewController extends JFrame {
                     } catch (ControllerException ex) {
                         labelError.setText(ex.getMessage());
                     }
+                    // Busca por um novo registro e imprimindo todos
 
                     serviceController.getAll().forEach(controller -> {
                         System.out.println(controller.getDateIn());
@@ -59,6 +61,7 @@ public class ViewController extends JFrame {
 
 
         btnOut.addActionListener(new ActionListener() {
+            // Realizando a saída dos carros
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
@@ -67,6 +70,27 @@ public class ViewController extends JFrame {
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
+            }
+        });
+
+        btnSearch.addActionListener(new ActionListener() {
+            //Realizando a busca por períodos
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    serviceController.byDate(
+                            textBefore.getText(),
+                            textAfter.getText()).forEach(controller -> {
+                                //Imprimindo a placa e a data das saídas
+
+                                System.out.println("Licence: " + controller.getLicense()+ " | "
+                                        + " Date Time: " + controller.getDateIn());
+                });
+
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+
             }
         });
 

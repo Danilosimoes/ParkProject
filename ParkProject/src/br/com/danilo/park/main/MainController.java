@@ -7,6 +7,7 @@ import br.com.danilo.park.view.ViewController;
 import javax.swing.*;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+//Principal
 
 public class MainController {
     public static void main(String[] args) throws SQLException {
@@ -20,6 +21,7 @@ public class MainController {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                //Tornando o form visível
                 ViewController vc = new ViewController();
                 vc.setVisible(true);
             }

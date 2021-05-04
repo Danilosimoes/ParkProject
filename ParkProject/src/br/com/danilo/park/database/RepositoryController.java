@@ -11,6 +11,8 @@ import java.util.List;
 
 public class RepositoryController {
 
+    //Inserindo as operações de banco de dados
+
     public List<Controller> getAll() throws SQLException {
         List<Controller> list = new ArrayList<>();
         Connection con = MySQLConnection.getConnection();
@@ -77,27 +79,25 @@ public class RepositoryController {
     }
 
 
-    public Controller findDate(String dateOne, String dateTwo ) throws SQLException {
+    public List<Controller> findAll(String dateOne, String dateTwo) throws SQLException {
+        List<Controller> list = new ArrayList<>();
         Connection con = MySQLConnection.getConnection();
         PreparedStatement ps = con.prepareStatement("SELECT * FROM CONTROLLER WHERE DATE_IN BETWEEN ? AND ?");
         ps.setString(1, dateOne);
         ps.setString(2, dateTwo);
         ResultSet rs = ps.executeQuery();
-        Controller controller = null;
-        if (rs.next()){
-            controller = new Controller(
+        while (rs.next()) {
+            list.add(new Controller(
                     rs.getLong("ID"),
                     rs.getString("LICENSE"),
                     rs.getString("MODEL"),
                     rs.getTimestamp("DATE_IN").toLocalDateTime(),
                     rs.getTimestamp("DATE_OUT").toLocalDateTime(),
-                    rs.getDouble("TOTAL"));
-
+                    rs.getDouble("TOTAL")
+            ));
         }
         con.close();
         ps.close();
-        return controller;
-
-
+        return list;
     }
 }
