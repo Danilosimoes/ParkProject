@@ -16,7 +16,7 @@ public class MySQLConnection {
         return DriverManager.getConnection(
                 "url",
                 "user",
-                "pass"
+                "password"
 
 
 
